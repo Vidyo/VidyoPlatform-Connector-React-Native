@@ -136,6 +136,10 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         connector.selectDefaultCamera();
     }
 
+    public void cycleCamera() {
+        connector.cycleCamera();
+    }
+
     public void setMode(String mode) {
         ConnectorMode background = ConnectorMode.VIDYO_CONNECTORMODE_Background;
         ConnectorMode foreground = ConnectorMode.VIDYO_CONNECTORMODE_Foreground;

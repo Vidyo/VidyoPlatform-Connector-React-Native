@@ -102,6 +102,7 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
         return builder
                 .put("connect", VidyoConnectorCommands.CONNECT.getCode())
                 .put("disconnect", VidyoConnectorCommands.DISCONNECT.getCode())
+                .put("cycleCamera", VidyoConnectorCommands.CYCLE_CAMERA.getCode())
                 .build();
     }
 
@@ -109,12 +110,17 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
     public void receiveCommand(@NonNull VidyoConnectorView vc, int commandId, @Nullable ReadableArray params) {
         super.receiveCommand(vc, commandId, params);
 
-        switch (commandId) {
-            case 0:
+        VidyoConnectorCommands command = VidyoConnectorCommands.match(commandId);
+
+        switch (command) {
+            case CONNECT:
                 vc.connect(params);
                 break;
-            case 1:
+            case DISCONNECT:
                 vc.disconnect();
+                break;
+            case CYCLE_CAMERA:
+                vc.cycleCamera();
                 break;
         }
     }

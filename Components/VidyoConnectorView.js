@@ -23,6 +23,10 @@ class VidyoConnectorView extends Component {
     UIManager.dispatchViewManagerCommand(this.vcHandle, Commands.disconnect, []);
   }
 
+  cycleCamera() {
+    UIManager.dispatchViewManagerCommand(this.vcHandle, Commands.cycleCamera, []);
+  }
+
   _onConnect = (event) => {
     if (this.props.onConnect) {
       const { ...payload } = event.nativeEvent

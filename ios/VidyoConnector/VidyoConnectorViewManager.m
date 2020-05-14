@@ -82,6 +82,18 @@ RCT_EXPORT_METHOD(disconnect:(nonnull NSNumber*)reactTag)
   }];
 }
 
+RCT_EXPORT_METHOD(cycleCamera:(nonnull NSNumber*)reactTag)
+{
+  [self.bridge.uiManager addUIBlock:
+   ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
+    VidyoConnectorView *view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[VidyoConnectorView class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting VidyoConnectorView, got: %@", view);
+    }
+    [view cycleCamera];
+  }];
+}
+
 - (UIView *)view
 {
   if (vidyoView == nil) {

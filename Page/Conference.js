@@ -139,6 +139,10 @@ export default class Conference extends Component<Props> {
         this.setState({ microphoneButtonState: !this.state.microphoneButtonState });
     }
 
+    _cycleCameraPressHandler = (event) => {
+        this.vidyoConnector.cycleCamera();
+    }
+
     _keyboardDidShow = () => {
         this.setState({ keyboardDidShow: true });
     }
@@ -238,6 +242,7 @@ export default class Conference extends Component<Props> {
                 callButtonPressHandler       = { this._callButtonPressHandler }
                 cameraButtonPressHandler     = { this._cameraButtonPressHandler }
                 microphoneButtonPressHandler = { this._microphoneButtonPressHandler }
+                cycleCameraPressHandler      = { this._cycleCameraPressHandler }
               />
             </View>
           </Animated.View>

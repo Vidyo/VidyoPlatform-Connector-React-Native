@@ -49,6 +49,7 @@
 - (void)setCameraPrivacy:(BOOL)cameraPrivacy;
 - (void)setMicrophonePrivacy:(BOOL)microphonePrivacy;
 - (void)setMode:(VCConnectorMode)mode;
+- (void)cycleCamera;
 
 - (void)connectToRoomAsGuest:(NSString *)portal
                      RoomKey:(NSString *)roomKey

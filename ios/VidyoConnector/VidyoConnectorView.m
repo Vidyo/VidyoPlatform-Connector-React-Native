@@ -93,6 +93,11 @@
   [_connector setMicrophonePrivacy:microphonePrivacy];
 }
 
+- (void)cycleCamera
+{
+  [_connector cycleCamera];
+}
+
 - (void)setMode:(VCConnectorMode)mode
 {
   [self.connector setMode:mode];

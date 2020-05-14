@@ -14,7 +14,8 @@ export default class Toolbar extends Component {
     return {
       callButtonImage:       this.props.callButtonState       ? require('../assets/callEnd.png')       : require('../assets/callStart.png'),
       cameraButtonImage:     this.props.cameraButtonState     ? require('../assets/cameraOff.png')     : require('../assets/cameraOn.png'),
-      microphoneButtonImage: this.props.microphoneButtonState ? require('../assets/microphoneOff.png') : require('../assets/microphoneOn.png')
+      microphoneButtonImage: this.props.microphoneButtonState ? require('../assets/microphoneOff.png') : require('../assets/microphoneOn.png'),
+      cycleCameraButtonImage: require('../assets/cameraSwitch.png')
     }
   }
 
@@ -70,6 +71,14 @@ export default class Toolbar extends Component {
                     source  = { this.computedSources.microphoneButtonImage }
                 />
               </TouchableHighlight>
+              <TouchableHighlight 
+                  style   = { styles.toolbarButton } 
+                  onPress = { this.props.cycleCameraPressHandler }>
+                <Image 
+                    style   = { styles.buttonBigImage }
+                    source  = { this.computedSources.cycleCameraButtonImage }
+                />
+              </TouchableHighlight>
             </View>
             <View style = { styles.toolbarRight }>
               <Text style = { styles.text }>
@@ -100,7 +109,7 @@ const styles = StyleSheet.create({
     width:             "30%"
   },
   toolbarCenter: {
-    width:             "40%",
+    width:             "60%",
     flexDirection:     "row",
     alignItems:        "center",
     justifyContent:    "center"
@@ -125,6 +134,10 @@ const styles = StyleSheet.create({
   buttonImage: {
     width:               23,
     height:              23
+  },
+  buttonBigImage: {
+    width:               42,
+    height:              42
   },
   text: {
     fontSize:            12,
