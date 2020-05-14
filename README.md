@@ -35,6 +35,6 @@ Go to `./android/local.properties` and set location of the Android SDK
 
 3. Build and run the application on the iOS or Android device.
 
-    `react-native run-ios`
+    `npx react-native run-ios`
     
-    `react-native run-android`
+    `npx react-native run-android`
