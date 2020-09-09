@@ -33,6 +33,13 @@
   [self showView];
 }
 
+- (void)removeFromSuperview {
+  [super removeFromSuperview];
+
+  /* Shut down the renderer when we are moving away from view */
+  [self hideView];
+}
+
 - (void)createVidyoConnector
 {
   const char * logLevels = "debug@VidyoClient debug@VidyoConnector fatal error info";
@@ -55,6 +62,22 @@
                              Y:0
                          Width:screenWidth
                         Height:screenHeight];
+  });
+}
+
+ /* Re-attach the renderer to the view */
+- (void)reAssignView {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.connector assignViewToCompositeRenderer:(void *)&self
+                                        ViewStyle:VCConnectorViewStyleDefault
+                               RemoteParticipants:8];
+  });
+}
+
+ /* Shut down the rendering */
+- (void)hideView {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.connector hideView:(void *)&self];
   });
 }
 
@@ -101,6 +124,15 @@
 - (void)setMode:(VCConnectorMode)mode
 {
   [self.connector setMode:mode];
+
+  if (mode == VCConnectorModeBackground) {
+    /* Background: shut down the rendering */
+    [self hideView];
+  } else {
+    /* Foreground: Re-attach renderer and start rendering back */
+    [self reAssignView];
+    [self showView];
+  }
 }
 
 - (void)connectToRoomAsGuest:(NSString *)portal RoomKey:(NSString *)roomKey RoomPin:(NSString *)roomPin DisplayName:(NSString *)displayName
