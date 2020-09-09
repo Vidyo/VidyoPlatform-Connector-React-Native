@@ -2,6 +2,8 @@ package com.vidyo.connector.view;
 
 import android.Manifest;
 import android.app.Activity;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
@@ -28,6 +30,8 @@ import java.util.ArrayList;
 
 public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener {
 
+    private static final String TAG = VidyoConnectorView.class.getCanonicalName();
+
     private Activity currentActivity;
     private ThemedReactContext reactContext;
 
@@ -50,20 +54,14 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
     public VidyoConnectorView(ThemedReactContext context) {
         super(context);
+        Log.i(TAG, "VidyoConnectorView created.");
+
         reactContext = context;
 
         currentActivity = reactContext.getCurrentActivity();
 
-        if (currentActivity != null) {
-            currentActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            if (ConnectorPkg.initialize()) {
-                ConnectorPkg.setApplicationUIContext(currentActivity);
-                ActivityCompat.requestPermissions(currentActivity, mPermissions, 1);
-
-                createVidyoConnector();
-                _initialized = true;
-            }
-        }
+        /* 100 ms artificial delay before initialize. */
+        this.postDelayed(postInitialize, DateUtils.SECOND_IN_MILLIS / 10L);
     }
 
     public void setViewStyle(String viewStyle) {
@@ -100,6 +98,8 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     }
 
     public void dispose() {
+        Log.i(TAG, "Called to dispose.");
+
         if (this._initialized) {
             connector.unregisterParticipantEventListener();
             connector.disable();
@@ -121,18 +121,26 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     }
 
     public void disconnect() {
+        if (!isAvailable()) return;
+
         connector.disconnect();
     }
 
     public void setCameraPrivacy(boolean privacy) {
+        if (!isAvailable()) return;
+
         connector.setCameraPrivacy(privacy);
     }
 
     public void setMicrophonePrivacy(boolean privacy) {
+        if (!isAvailable()) return;
+
         connector.setMicrophonePrivacy(privacy);
     }
 
     public void selectDefaultCamera() {
+        if (!isAvailable()) return;
+
         connector.selectDefaultCamera();
     }
 
@@ -141,24 +149,58 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     }
 
     public void setMode(String mode) {
+        if (!isAvailable()) return;
+
         ConnectorMode background = ConnectorMode.VIDYO_CONNECTORMODE_Background;
         ConnectorMode foreground = ConnectorMode.VIDYO_CONNECTORMODE_Foreground;
         ConnectorMode connectorMode = mode.equals("VIDYO_CONNECTORMODE_Background") ? background : foreground;
         connector.setMode(connectorMode);
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        refreshUi();
+    }
+
+    /* Create connector block */
+    private Runnable postInitialize = new Runnable() {
+
+        @Override
+        public void run() {
+            if (currentActivity != null) {
+                currentActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+                if (ConnectorPkg.initialize()) {
+                    ConnectorPkg.setApplicationUIContext(currentActivity);
+                    ActivityCompat.requestPermissions(currentActivity, mPermissions, 1);
+
+                    _initialized = true;
+
+                    createVidyoConnector();
+                    refreshUi();
+                }
+            }
+        }
+    };
+
+    private boolean isAvailable() {
+        return _initialized && connector != null;
+    }
+
+    private void refreshUi() {
+        if (!isAvailable()) return;
+
+        int width = getWidth();
+        int height = getHeight();
+        connector.showViewAt(this, 0, 0, getWidth(), getHeight());
+        Log.i(VidyoConnectorView.class.getCanonicalName(), "Show view at: " + width + ":" + height);
+    }
+
     private void emit(String event, WritableMap payload) {
         ReactContext reactContext = (ReactContext) getContext();
         RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
         eventEmitter.receiveEvent(getId(), event, payload);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (connector != null) {
-            connector.showViewAt(this, 0, 0, getWidth(), getHeight());
-        }
     }
 
     @Override
@@ -190,7 +232,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         payload.putInt("target", getId());
 
         if (reason == ConnectorDisconnectReason.VIDYO_CONNECTORDISCONNECTREASON_Disconnected) {
-            payload.putString("reason", "Disconnected: Successfully disconnected");
+            payload.putString("reason", "Disconnected: Succesfully disconnected");
         } else {
             payload.putString("reason", "Disconnected: Unexpected disconnection");
         }
