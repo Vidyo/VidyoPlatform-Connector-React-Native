@@ -11,26 +11,12 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1958247E2608BAD100F12295 /* VidyoClientIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */; };
+		195824A82608BE0000F12295 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195824A72608BE0000F12295 /* SystemConfiguration.framework */; };
 		19C901FC23EC51BD00A798A1 /* VidyoConnectorViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C901F823EC51BD00A798A1 /* VidyoConnectorViewManager.m */; };
 		19C901FD23EC51BD00A798A1 /* VidyoConnectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C901FA23EC51BD00A798A1 /* VidyoConnectorView.m */; };
-		19C901FF23EC51ED00A798A1 /* VidyoClientIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */; };
-		19C9020023EC51ED00A798A1 /* VidyoClientIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CBBB99BE90233205E39E9A43 /* libPods-VidyoConnector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDAEB098CDF2CC641D71E46 /* libPods-VidyoConnector.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		19C9020123EC51ED00A798A1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				19C9020023EC51ED00A798A1 /* VidyoClientIOS.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -43,6 +29,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = VidyoConnector/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = VidyoConnector/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = VidyoConnector/main.m; sourceTree = "<group>"; };
+		195824552608B9F400F12295 /* VidyoClientIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VidyoClientIOS.framework; sourceTree = "<group>"; };
+		195824A72608BE0000F12295 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		19C901F823EC51BD00A798A1 /* VidyoConnectorViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VidyoConnectorViewManager.m; path = VidyoConnector/VidyoConnectorViewManager.m; sourceTree = "<group>"; };
 		19C901F923EC51BD00A798A1 /* VidyoConnectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VidyoConnectorView.h; path = VidyoConnector/VidyoConnectorView.h; sourceTree = "<group>"; };
 		19C901FA23EC51BD00A798A1 /* VidyoConnectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VidyoConnectorView.m; path = VidyoConnector/VidyoConnectorView.m; sourceTree = "<group>"; };
@@ -70,7 +58,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBBB99BE90233205E39E9A43 /* libPods-VidyoConnector.a in Frameworks */,
-				19C901FF23EC51ED00A798A1 /* VidyoClientIOS.framework in Frameworks */,
+				195824A82608BE0000F12295 /* SystemConfiguration.framework in Frameworks */,
+				1958247E2608BAD100F12295 /* VidyoClientIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +119,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				195824A72608BE0000F12295 /* SystemConfiguration.framework */,
 				19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */,
+				195824552608B9F400F12295 /* VidyoClientIOS.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				7CDAEB098CDF2CC641D71E46 /* libPods-VidyoConnector.a */,
@@ -184,7 +175,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				19C9020123EC51ED00A798A1 /* Embed Frameworks */,
+				B09B1C26B5DBB831F4559980 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,6 +268,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B09B1C26B5DBB831F4559980 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VidyoConnector/Pods-VidyoConnector-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VidyoConnector/Pods-VidyoConnector-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,64 +345,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/ios",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
-					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
-					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
-					"\"${PODS_ROOT}/Headers/Public/RNCMaskedView\"",
-					"\"${PODS_ROOT}/Headers/Public/RNGestureHandler\"",
-					"\"${PODS_ROOT}/Headers/Public/RNReanimated\"",
-					"\"${PODS_ROOT}/Headers/Public/RNScreens\"",
-					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
-					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
-					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
-					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
-					"\"${PODS_ROOT}/Headers/Public/glog\"",
-					"\"${PODS_ROOT}/Headers/Public/react-native-safe-area-context\"",
-					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
 					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.framework/Headers",
 				);
 				INFOPLIST_FILE = VidyoConnector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCMaskedView\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNReanimated\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTActionSheet\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-safe-area-context\"",
 					"$(PROJECT_DIR)/lib/ios/",
 				);
 				OTHER_LDFLAGS = (
@@ -401,7 +362,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.new;
 				PRODUCT_NAME = "Vidyo Connector";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -417,64 +378,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/ios",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
-					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
-					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
-					"\"${PODS_ROOT}/Headers/Public/RNCMaskedView\"",
-					"\"${PODS_ROOT}/Headers/Public/RNGestureHandler\"",
-					"\"${PODS_ROOT}/Headers/Public/RNReanimated\"",
-					"\"${PODS_ROOT}/Headers/Public/RNScreens\"",
-					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
-					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
-					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
-					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
-					"\"${PODS_ROOT}/Headers/Public/glog\"",
-					"\"${PODS_ROOT}/Headers/Public/react-native-safe-area-context\"",
-					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
 					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.framework/Headers",
 				);
 				INFOPLIST_FILE = VidyoConnector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCMaskedView\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNReanimated\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTActionSheet\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-safe-area-context\"",
 					"$(PROJECT_DIR)/lib/ios/",
 				);
 				OTHER_LDFLAGS = (
@@ -482,7 +395,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.new;
 				PRODUCT_NAME = "Vidyo Connector";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
