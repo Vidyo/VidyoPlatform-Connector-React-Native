@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,17 +11,39 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1958247E2608BAD100F12295 /* VidyoClientIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */; };
 		195824A82608BE0000F12295 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195824A72608BE0000F12295 /* SystemConfiguration.framework */; };
+		199CE1AA2840D98600B776CA /* VidyoClientIOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1A92840D98600B776CA /* VidyoClientIOS.xcframework */; };
+		199CE1AE2840D99300B776CA /* BNBEffectPlayerC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1AD2840D99300B776CA /* BNBEffectPlayerC.xcframework */; };
+		199CE1AF2840D99300B776CA /* BNBEffectPlayerC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1AD2840D99300B776CA /* BNBEffectPlayerC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		199CE1B22840D99E00B776CA /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1B12840D99E00B776CA /* Photos.framework */; };
+		199CE1B42840DE8100B776CA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1B32840DE8100B776CA /* AudioToolbox.framework */; };
+		199CE1B62840DE8600B776CA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1B52840DE8600B776CA /* AVFoundation.framework */; };
+		199CE1B82840DE9100B776CA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1B72840DE9100B776CA /* AVKit.framework */; };
+		199CE1BA2840DE9A00B776CA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1B92840DE9A00B776CA /* CoreLocation.framework */; };
+		199CE1BC2840DEA100B776CA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1BB2840DEA100B776CA /* CoreMedia.framework */; };
+		199CE1BE2840DEAD00B776CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199CE1BD2840DEAD00B776CA /* UIKit.framework */; };
 		19C901FC23EC51BD00A798A1 /* VidyoConnectorViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C901F823EC51BD00A798A1 /* VidyoConnectorViewManager.m */; };
 		19C901FD23EC51BD00A798A1 /* VidyoConnectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C901FA23EC51BD00A798A1 /* VidyoConnectorView.m */; };
+		4F9C86F853AB6F19B3D605E5 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE109076025ECE49E6D597 /* ExpoModulesProvider.swift */; };
 		CBBB99BE90233205E39E9A43 /* libPods-VidyoConnector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDAEB098CDF2CC641D71E46 /* libPods-VidyoConnector.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		199CE1B02840D99300B776CA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				199CE1AF2840D99300B776CA /* BNBEffectPlayerC.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* VidyoConnectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VidyoConnectorTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Vidyo Connector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vidyo Connector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VidyoConnector/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = VidyoConnector/AppDelegate.m; sourceTree = "<group>"; };
@@ -29,27 +51,25 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = VidyoConnector/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = VidyoConnector/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = VidyoConnector/main.m; sourceTree = "<group>"; };
-		195824552608B9F400F12295 /* VidyoClientIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VidyoClientIOS.framework; sourceTree = "<group>"; };
 		195824A72608BE0000F12295 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		199CE1A92840D98600B776CA /* VidyoClientIOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VidyoClientIOS.xcframework; path = lib/ios/VidyoClientIOS.xcframework; sourceTree = "<group>"; };
+		199CE1AD2840D99300B776CA /* BNBEffectPlayerC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BNBEffectPlayerC.xcframework; path = lib/ios/Banuba/BNBEffectPlayerC.xcframework; sourceTree = "<group>"; };
+		199CE1B12840D99E00B776CA /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		199CE1B32840DE8100B776CA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		199CE1B52840DE8600B776CA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		199CE1B72840DE9100B776CA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		199CE1B92840DE9A00B776CA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		199CE1BB2840DEA100B776CA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		199CE1BD2840DEAD00B776CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		19C901F823EC51BD00A798A1 /* VidyoConnectorViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VidyoConnectorViewManager.m; path = VidyoConnector/VidyoConnectorViewManager.m; sourceTree = "<group>"; };
 		19C901F923EC51BD00A798A1 /* VidyoConnectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VidyoConnectorView.h; path = VidyoConnector/VidyoConnectorView.h; sourceTree = "<group>"; };
 		19C901FA23EC51BD00A798A1 /* VidyoConnectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VidyoConnectorView.m; path = VidyoConnector/VidyoConnectorView.m; sourceTree = "<group>"; };
 		19C901FB23EC51BD00A798A1 /* VidyoConnectorViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VidyoConnectorViewManager.h; path = VidyoConnector/VidyoConnectorViewManager.h; sourceTree = "<group>"; };
-		19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VidyoClientIOS.framework; path = lib/ios/VidyoClientIOS.framework; sourceTree = "<group>"; };
-		3DC4707FF9E1E48BBDCC4EE3 /* Pods-VidyoConnectorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnectorTests.release.xcconfig"; path = "Target Support Files/Pods-VidyoConnectorTests/Pods-VidyoConnectorTests.release.xcconfig"; sourceTree = "<group>"; };
-		5F89C28B05F9183A17986180 /* Pods-VidyoConnector-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-VidyoConnector-tvOS/Pods-VidyoConnector-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7006C5B7E74E577701DCA88E /* Pods-VidyoConnector-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-VidyoConnector-tvOSTests/Pods-VidyoConnector-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CDAEB098CDF2CC641D71E46 /* libPods-VidyoConnector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VidyoConnector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B20997F96D4A8BE740A6776 /* Pods-VidyoConnector-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-VidyoConnector-tvOSTests/Pods-VidyoConnector-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		CA6A4D88CC93892FC3F6778A /* libPods-VidyoConnector-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VidyoConnector-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EDE109076025ECE49E6D597 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-VidyoConnector/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		CD707857C17691DD203D5754 /* Pods-VidyoConnector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector.debug.xcconfig"; path = "Target Support Files/Pods-VidyoConnector/Pods-VidyoConnector.debug.xcconfig"; sourceTree = "<group>"; };
-		D666E11A480D1554B2048717 /* libPods-VidyoConnectorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VidyoConnectorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6F7C019E977B4AC2D199F00 /* libPods-VidyoConnector-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VidyoConnector-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF3A432881C0E8D114C9F1E3 /* Pods-VidyoConnector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector.release.xcconfig"; path = "Target Support Files/Pods-VidyoConnector/Pods-VidyoConnector.release.xcconfig"; sourceTree = "<group>"; };
-		DFA59D9D8B7FB674BFEDE482 /* Pods-VidyoConnector-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnector-tvOS.release.xcconfig"; path = "Target Support Files/Pods-VidyoConnector-tvOS/Pods-VidyoConnector-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F9255CD660F9B23624235A06 /* Pods-VidyoConnectorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VidyoConnectorTests.debug.xcconfig"; path = "Target Support Files/Pods-VidyoConnectorTests/Pods-VidyoConnectorTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,31 +78,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBBB99BE90233205E39E9A43 /* libPods-VidyoConnector.a in Frameworks */,
+				199CE1BE2840DEAD00B776CA /* UIKit.framework in Frameworks */,
+				199CE1B22840D99E00B776CA /* Photos.framework in Frameworks */,
+				199CE1B82840DE9100B776CA /* AVKit.framework in Frameworks */,
+				199CE1BA2840DE9A00B776CA /* CoreLocation.framework in Frameworks */,
+				199CE1BC2840DEA100B776CA /* CoreMedia.framework in Frameworks */,
 				195824A82608BE0000F12295 /* SystemConfiguration.framework in Frameworks */,
-				1958247E2608BAD100F12295 /* VidyoClientIOS.framework in Frameworks */,
+				199CE1AE2840D99300B776CA /* BNBEffectPlayerC.xcframework in Frameworks */,
+				199CE1AA2840D98600B776CA /* VidyoClientIOS.xcframework in Frameworks */,
+				199CE1B62840DE8600B776CA /* AVFoundation.framework in Frameworks */,
+				199CE1B42840DE8100B776CA /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* VidyoConnectorTests */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F21AD99517003FC87E /* VidyoConnectorTests.m */,
-				00E356F01AD99517003FC87E /* Supporting Files */,
-			);
-			path = VidyoConnectorTests;
-			sourceTree = "<group>";
-		};
-		00E356F01AD99517003FC87E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F11AD99517003FC87E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* VidyoConnector */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,12 +117,6 @@
 			children = (
 				CD707857C17691DD203D5754 /* Pods-VidyoConnector.debug.xcconfig */,
 				DF3A432881C0E8D114C9F1E3 /* Pods-VidyoConnector.release.xcconfig */,
-				5F89C28B05F9183A17986180 /* Pods-VidyoConnector-tvOS.debug.xcconfig */,
-				DFA59D9D8B7FB674BFEDE482 /* Pods-VidyoConnector-tvOS.release.xcconfig */,
-				7006C5B7E74E577701DCA88E /* Pods-VidyoConnector-tvOSTests.debug.xcconfig */,
-				9B20997F96D4A8BE740A6776 /* Pods-VidyoConnector-tvOSTests.release.xcconfig */,
-				F9255CD660F9B23624235A06 /* Pods-VidyoConnectorTests.debug.xcconfig */,
-				3DC4707FF9E1E48BBDCC4EE3 /* Pods-VidyoConnectorTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -119,17 +124,28 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				199CE1BD2840DEAD00B776CA /* UIKit.framework */,
+				199CE1BB2840DEA100B776CA /* CoreMedia.framework */,
+				199CE1B92840DE9A00B776CA /* CoreLocation.framework */,
+				199CE1B72840DE9100B776CA /* AVKit.framework */,
+				199CE1B52840DE8600B776CA /* AVFoundation.framework */,
+				199CE1B32840DE8100B776CA /* AudioToolbox.framework */,
+				199CE1B12840D99E00B776CA /* Photos.framework */,
+				199CE1AD2840D99300B776CA /* BNBEffectPlayerC.xcframework */,
+				199CE1A92840D98600B776CA /* VidyoClientIOS.xcframework */,
 				195824A72608BE0000F12295 /* SystemConfiguration.framework */,
-				19C901FE23EC51ED00A798A1 /* VidyoClientIOS.framework */,
-				195824552608B9F400F12295 /* VidyoClientIOS.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				7CDAEB098CDF2CC641D71E46 /* libPods-VidyoConnector.a */,
-				CA6A4D88CC93892FC3F6778A /* libPods-VidyoConnector-tvOS.a */,
-				D6F7C019E977B4AC2D199F00 /* libPods-VidyoConnector-tvOSTests.a */,
-				D666E11A480D1554B2048717 /* libPods-VidyoConnectorTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		76DCDE2CAB5986A384E4BC54 /* VidyoConnector */ = {
+			isa = PBXGroup;
+			children = (
+				7EDE109076025ECE49E6D597 /* ExpoModulesProvider.swift */,
+			);
+			name = VidyoConnector;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -144,10 +160,10 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* VidyoConnector */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* VidyoConnectorTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				2C4CF556351C598625D3A53E /* Pods */,
+				98E8FD1BF1874165ED0D2751 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -160,6 +176,14 @@
 				13B07F961A680F5B00A75B9A /* Vidyo Connector.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		98E8FD1BF1874165ED0D2751 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				76DCDE2CAB5986A384E4BC54 /* VidyoConnector */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +200,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				B09B1C26B5DBB831F4559980 /* [CP] Copy Pods Resources */,
+				199CE1B02840D99300B776CA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,7 +217,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
@@ -275,10 +300,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VidyoConnector/Pods-VidyoConnector-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +343,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				19C901FC23EC51BD00A798A1 /* VidyoConnectorViewManager.m in Sources */,
+				4F9C86F853AB6F19B3D605E5 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,32 +366,47 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD707857C17691DD203D5754 /* Pods-VidyoConnector.debug.xcconfig */;
 			buildSettings = {
+				"ARCHS[sdk=*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 3UZG6D386K;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/ios",
-					"$(PROJECT_DIR)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.framework/Headers",
-				);
-				INFOPLIST_FILE = VidyoConnector/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/ios/",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.xcframework/ios-arm64/VidyoClientIOS.framework/Headers",
+				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.xcframework/ios-arm64/VidyoClientIOS.framework/Headers",
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.xcframework/ios-x86_64-simulator/VidyoClientIOS.framework/Headers",
+				);
+				INFOPLIST_FILE = VidyoConnector/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.new;
 				PRODUCT_NAME = "Vidyo Connector";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -372,31 +415,46 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF3A432881C0E8D114C9F1E3 /* Pods-VidyoConnector.release.xcconfig */;
 			buildSettings = {
+				"ARCHS[sdk=*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3UZG6D386K;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/ios",
-					"$(PROJECT_DIR)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.framework/Headers",
-				);
-				INFOPLIST_FILE = VidyoConnector/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/ios/",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/",
+				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.xcframework/ios-arm64/VidyoClientIOS.framework/Headers",
+				);
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios/VidyoClientIOS.xcframework/ios-x86_64-simulator/VidyoClientIOS.framework/Headers",
+				);
+				INFOPLIST_FILE = VidyoConnector/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidyo.connector.react.new;
 				PRODUCT_NAME = "Vidyo Connector";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -447,7 +505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -493,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
