@@ -30,6 +30,7 @@
 @property (nonatomic, assign) int                  userData;
 
 @property (nonatomic, copy) RCTBubblingEventBlock onConnect;
+@property (nonatomic, copy) RCTBubblingEventBlock onFailure;
 @property (nonatomic, copy) RCTBubblingEventBlock onDisconnect;
 
 @property (nonatomic, copy) RCTBubblingEventBlock onParticipantJoined;

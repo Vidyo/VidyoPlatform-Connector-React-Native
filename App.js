@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./Page/Home";
 import Conference from "./Page/Conference";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={"Home"}>
-          <Stack.Screen
+        <Stack.Screen
             name={"Home"}
             component={Home}
             options={{ headerShown: false }}
@@ -26,7 +26,7 @@ export default class App extends Component {
               headerShown: true,
             }}
           />
-        </Stack.Navigator>
+      </Stack.Navigator>
       </NavigationContainer>
     );
   }

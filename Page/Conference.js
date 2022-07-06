@@ -74,10 +74,23 @@ export default class Conference extends Component<Props> {
         });
     }
 
+    onFailure = (payload) => {
+        const { reason } = payload;
+        this.setState({
+            connected:              false,
+            connectionStatus:       reason,
+            callButtonState:        false
+        }, () => {
+            this._toggleEntranceForm(false);
+            this._toggleToolbar(false);
+        });
+    }
+
     onDisconnect = (payload) => {
+        const { reason } = payload;
         this.setState({ 
             connected:              false,
-            connectionStatus:       payload.reason,
+            connectionStatus:       reason,
             callButtonState:        false
         }, () => {
             this._toggleEntranceForm(false);
@@ -218,7 +231,9 @@ export default class Conference extends Component<Props> {
               mode                        = {this.state.connectorMode}
 
               onConnect                   = {this.onConnect}
+              onFailure                   = {this.onFailure}
               onDisconnect                = {this.onDisconnect}
+
               onParticipantJoined         = {this.onParticipantJoined}
               onParticipantLeft           = {this.onParticipantLeft}
 

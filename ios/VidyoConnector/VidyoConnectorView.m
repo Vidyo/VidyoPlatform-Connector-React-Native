@@ -159,10 +159,10 @@
 
 - (void)onFailure:(VCConnectorFailReason)reason
 {
-  if (!self.onConnect) {
+  if (!self.onFailure) {
     return;
   }
-  self.onConnect(@{@"status": @"false", @"reason": @"Failed: Connection attempt failed"});
+  self.onFailure(@{@"reason": @"Failed: Connetion attempt failed"});
 }
 
 - (void)onDisconnected:(VCConnectorDisconnectReason)reason

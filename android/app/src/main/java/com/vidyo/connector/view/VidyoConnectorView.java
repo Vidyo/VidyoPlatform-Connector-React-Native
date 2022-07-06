@@ -219,10 +219,9 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         WritableMap payload = Arguments.createMap();
 
         payload.putInt("target", getId());
-        payload.putBoolean("status", false);
         payload.putString("reason", "Failed: Connection attempt failed");
 
-        emit("onConnect", payload);
+        emit("onFailure", payload);
     }
 
     @Override
@@ -232,7 +231,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         payload.putInt("target", getId());
 
         if (reason == ConnectorDisconnectReason.VIDYO_CONNECTORDISCONNECTREASON_Disconnected) {
-            payload.putString("reason", "Disconnected: Succesfully disconnected");
+            payload.putString("reason", "Disconnected: Successfully disconnected");
         } else {
             payload.putString("reason", "Disconnected: Unexpected disconnection");
         }

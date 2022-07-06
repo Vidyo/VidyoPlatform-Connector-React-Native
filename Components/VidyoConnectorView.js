@@ -34,6 +34,13 @@ class VidyoConnectorView extends Component {
     }
   };
 
+  _onFailure = (event) => {
+    if (this.props.onFailure) {
+      const { ...payload } = event.nativeEvent
+      this.props.onFailure(payload);
+    }
+  }
+
   _onDisconnect = (event) => {
     if (this.props.onDisconnect) {
       const { ...payload } = event.nativeEvent
@@ -74,6 +81,7 @@ class VidyoConnectorView extends Component {
       <VidyoConnectorView_ ref = { _ => this.vcRef = _ } { ...this.props } 
       
         onConnect                   = {this._onConnect}
+        onFailure                   = {this._onFailure}
         onDisconnect                = {this._onDisconnect}
 
         onParticipantJoined         = {this._onParticipantJoined}
@@ -98,6 +106,7 @@ VidyoConnectorView.propTypes = {
   microphonePrivacy:            PropTypes.bool,
 
   onConnect:                    PropTypes.func,
+  onFailure:                    PropTypes.func,
   onDisconnect:                 PropTypes.func,
 
   onParticipantJoined:          PropTypes.func,
@@ -111,6 +120,7 @@ VidyoConnectorView.propTypes = {
 var VidyoConnectorView_ = requireNativeComponent(`VidyoConnectorView`, VidyoConnectorView, {
   nativeOnly: {
     onConnect:                    true,
+    onFailure:                    true,
     onDisconnect:                 true,
 
     onParticipantJoined:          true,

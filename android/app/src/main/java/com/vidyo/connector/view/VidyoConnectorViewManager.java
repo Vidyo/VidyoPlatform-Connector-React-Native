@@ -84,6 +84,7 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
 
         return builder
                 .put("onConnect", MapBuilder.of("registrationName", "onConnect"))
+                .put("onFailure", MapBuilder.of("registrationName", "onFailure"))
                 .put("onDisconnect", MapBuilder.of("registrationName", "onDisconnect"))
 
                 .put("onParticipantJoined", MapBuilder.of("registrationName", "onParticipantJoined"))
