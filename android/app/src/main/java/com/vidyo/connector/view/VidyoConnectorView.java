@@ -2,7 +2,6 @@ package com.vidyo.connector.view;
 
 import android.Manifest;
 import android.app.Activity;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -32,9 +31,6 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
     private static final String TAG = VidyoConnectorView.class.getCanonicalName();
 
-    private Activity currentActivity;
-    private ThemedReactContext reactContext;
-
     private Connector connector;
 
     private ConnectorViewStyle viewStyle = ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default;
@@ -46,22 +42,45 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
     private boolean _initialized = false;
 
-    private static final String[] mPermissions = {
+    private static final int PERMISSIONS_REQUEST_ALL = 0x7c9;
+    private static final String[] PERMISSIONS = new String[]{
             Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.RECORD_AUDIO
     };
 
     public VidyoConnectorView(ThemedReactContext context) {
         super(context);
         Log.i(TAG, "VidyoConnectorView created.");
 
-        reactContext = context;
+        Activity currentActivity = context.getCurrentActivity();
 
-        currentActivity = reactContext.getCurrentActivity();
+        if (currentActivity != null) {
+            currentActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        /* 100 ms artificial delay before initialize. */
-        this.postDelayed(postInitialize, DateUtils.SECOND_IN_MILLIS / 10L);
+            if (ConnectorPkg.initialize()) {
+                ConnectorPkg.setApplicationUIContext(currentActivity);
+                ActivityCompat.requestPermissions(currentActivity, PERMISSIONS, PERMISSIONS_REQUEST_ALL);
+
+                _initialized = true;
+                createVidyoConnector();
+                refreshUi();
+            }
+        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int childWidthMS = MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY);
+        int childHeightMS = MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY);
+        for (int child = 0; child < getChildCount(); child++)
+            getChildAt(child).measure(childWidthMS, childHeightMS);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        for (int child = 0; child < getChildCount(); child++)
+            getChildAt(child).layout(0, 0, getWidth(), getHeight());
     }
 
     public void setViewStyle(String viewStyle) {
@@ -162,27 +181,6 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         super.onAttachedToWindow();
         refreshUi();
     }
-
-    /* Create connector block */
-    private Runnable postInitialize = new Runnable() {
-
-        @Override
-        public void run() {
-            if (currentActivity != null) {
-                currentActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-                if (ConnectorPkg.initialize()) {
-                    ConnectorPkg.setApplicationUIContext(currentActivity);
-                    ActivityCompat.requestPermissions(currentActivity, mPermissions, 1);
-
-                    _initialized = true;
-
-                    createVidyoConnector();
-                    refreshUi();
-                }
-            }
-        }
-    };
 
     private boolean isAvailable() {
         return _initialized && connector != null;
