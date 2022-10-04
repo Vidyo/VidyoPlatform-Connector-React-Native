@@ -23,11 +23,14 @@ import com.vidyo.VidyoClient.Connector.Connector.ConnectorViewStyle;
 import com.vidyo.VidyoClient.Connector.Connector.IConnect;
 import com.vidyo.VidyoClient.Connector.Connector.IRegisterParticipantEventListener;
 import com.vidyo.VidyoClient.Connector.ConnectorPkg;
+import com.vidyo.VidyoClient.Device.Device;
+import com.vidyo.VidyoClient.Device.LocalCamera;
 import com.vidyo.VidyoClient.Endpoint.Participant;
 
 import java.util.ArrayList;
 
-public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener {
+public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener,
+        Connector.IRegisterLocalCameraEventListener {
 
     private static final String TAG = VidyoConnectorView.class.getCanonicalName();
 
@@ -39,6 +42,8 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     private String logFileFilter = "debug@VidyoClient debug@VidyoConnector fatal error info";
     private String logFileName = "";
     private long userData = 0;
+
+    private LocalCamera lastSelectedCamera;
 
     private boolean _initialized = false;
 
@@ -179,11 +184,34 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        selectDefaultDevices();
         refreshUi();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        releaseDevices();
     }
 
     private boolean isAvailable() {
         return _initialized && connector != null;
+    }
+
+    private void selectDefaultDevices() {
+        if (lastSelectedCamera != null) {
+            connector.selectLocalCamera(lastSelectedCamera);
+        } else {
+            connector.selectDefaultCamera();
+        }
+        connector.selectDefaultMicrophone();
+        connector.selectDefaultSpeaker();
+    }
+
+    private void releaseDevices() {
+        connector.selectLocalCamera(null);
+        connector.selectLocalMicrophone(null);
+        connector.selectLocalSpeaker(null);
     }
 
     private void refreshUi() {
@@ -298,5 +326,26 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         payload.putBoolean("audioOnly", b);
 
         emit("onLoudestParticipantChanged", payload);
+    }
+
+    @Override
+    public void onLocalCameraAdded(LocalCamera localCamera) {
+        if (localCamera != null && localCamera.getPosition() == LocalCamera.LocalCameraPosition.VIDYO_LOCALCAMERAPOSITION_Front)
+            connector.selectLocalCamera(localCamera);
+    }
+
+    @Override
+    public void onLocalCameraSelected(LocalCamera localCamera) {
+        lastSelectedCamera = localCamera;
+    }
+
+    @Override
+    public void onLocalCameraRemoved(LocalCamera localCamera) {
+
+    }
+
+    @Override
+    public void onLocalCameraStateUpdated(LocalCamera localCamera, Device.DeviceState deviceState) {
+
     }
 }

@@ -43,7 +43,7 @@ RCT_CUSTOM_VIEW_PROPERTY(microphonePrivacy, NSString*, VidyoConnectorView) {
   [view setMicrophonePrivacy:[RCTConvert BOOL:json]];
 }
 RCT_CUSTOM_VIEW_PROPERTY(mode, NSString*, VidyoConnectorView) {
-  [view setMode:[[RCTConvert NSString:json] isEqual: @"VIDYO_CONNECTORMODE_Background"] ? VCConnectorModeBackground : VCConnectorModeForeground];
+  // Not implemented [not required]
 }
 
 RCT_EXPORT_VIEW_PROPERTY(onConnect,                   RCTBubblingEventBlock)

@@ -19,7 +19,7 @@
 
 @class RCTEventDispatcher;
 
-@interface VidyoConnectorView : UIView<VCConnectorIConnect, VCConnectorIRegisterParticipantEventListener>
+@interface VidyoConnectorView : UIView<VCConnectorIConnect, VCConnectorIRegisterParticipantEventListener, VCConnectorIRegisterLocalCameraEventListener>
 
 @property (nonatomic, strong) VCConnector          *connector;
 

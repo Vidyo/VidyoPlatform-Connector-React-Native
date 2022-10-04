@@ -10,6 +10,15 @@
 #import "VidyoConnectorView.h"
 
 
+@interface VidyoConnectorView () {
+@private
+  VCLocalCamera *lastSelectedCamera;
+  BOOL          devicesSelected;
+  BOOL          cameraPrivacy;
+  BOOL          microphonePrivacy;
+}
+@end
+
 @implementation VidyoConnectorView {
   RCTBridge *_bridge;
   RCTEventDispatcher *_eventDispatcher;
@@ -30,14 +39,28 @@
 
 - (void)didMoveToWindow
 {
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(appWillResignActive:)
+                                               name:UIApplicationWillResignActiveNotification
+                                             object:nil];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(appDidBecomeActive:)
+                                               name:UIApplicationDidBecomeActiveNotification
+                                             object:nil];
+  
+  [self selectDefaultDevices];
+  [self reAssignView];
   [self showView];
 }
 
 - (void)removeFromSuperview {
   [super removeFromSuperview];
-
+  
   /* Shut down the renderer when we are moving away from view */
   [self hideView];
+  [self releaseDevices];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)createVidyoConnector
@@ -51,6 +74,60 @@
                                 UserData:_userData];
   
   [_connector registerParticipantEventListener:self];
+  [_connector registerLocalCameraEventListener:self];
+}
+
+#pragma mark - Application Lifecycle
+
+- (void)appWillResignActive:(NSNotification*)notification {
+    if (_connector) {
+      if ([_connector getState] == VCConnectorStateConnected) {
+        // Connected or connecting to a resource.
+        // Enable camera privacy so remote participants do not see a frozen frame.
+        [_connector setCameraPrivacy:YES];
+      } else {
+        // Not connected to a resource.
+        // Release camera, mic, and speaker from this app while backgrounded.
+        [self releaseDevices];
+      }
+      
+      [_connector setMode:VCConnectorModeBackground];
+    }
+}
+
+- (void)appDidBecomeActive:(NSNotification*)notification {
+    if (_connector) {
+        [_connector setMode:VCConnectorModeForeground];
+
+        if (!devicesSelected) {
+            // Devices have been released when backgrounding (in appWillResignActive). Re-select them.
+            // Select the previously selected local camera and default mic/speaker
+            [self selectDefaultDevices];
+            [_connector setMicrophonePrivacy:microphonePrivacy];
+        }
+
+        // Reestablish camera privacy states
+        [_connector setCameraPrivacy: cameraPrivacy];
+    }
+}
+
+- (void)selectDefaultDevices {
+  if (lastSelectedCamera) {
+    [_connector selectLocalCamera: lastSelectedCamera];
+  } else {
+    [_connector selectDefaultCamera];
+  }
+  
+  [_connector selectDefaultMicrophone];
+  [_connector selectDefaultSpeaker];
+  devicesSelected = YES;
+}
+
+- (void)releaseDevices {
+  [_connector selectLocalCamera: nil];
+  [_connector selectLocalSpeaker: nil];
+  [_connector selectLocalMicrophone: nil];
+  devicesSelected = NO;
 }
 
 - (void)showView {
@@ -106,33 +183,21 @@
   _userData = userData;
 }
 
-- (void)setCameraPrivacy:(BOOL)cameraPrivacy
+- (void)setCameraPrivacy:(BOOL)privacy
 {
-  [_connector setCameraPrivacy:cameraPrivacy];
+  cameraPrivacy = privacy;
+  [_connector setCameraPrivacy:privacy];
 }
 
-- (void)setMicrophonePrivacy:(BOOL)microphonePrivacy
+- (void)setMicrophonePrivacy:(BOOL)privacy
 {
-  [_connector setMicrophonePrivacy:microphonePrivacy];
+  microphonePrivacy = privacy;
+  [_connector setMicrophonePrivacy:privacy];
 }
 
 - (void)cycleCamera
 {
   [_connector cycleCamera];
-}
-
-- (void)setMode:(VCConnectorMode)mode
-{
-  [self.connector setMode:mode];
-
-  if (mode == VCConnectorModeBackground) {
-    /* Background: shut down the rendering */
-    [self hideView];
-  } else {
-    /* Foreground: Re-attach renderer and start rendering back */
-    [self reAssignView];
-    [self showView];
-  }
 }
 
 - (void)connectToRoomAsGuest:(NSString *)portal RoomKey:(NSString *)roomKey RoomPin:(NSString *)roomPin DisplayName:(NSString *)displayName
@@ -176,6 +241,26 @@
     self.onDisconnect(@{@"reason": @"Disconnected: Unexpected disconnection"});
   }
 }
+
+#pragma mark - VCConnectorIRegisterLocalCameraEventListener
+
+-(void) onLocalCameraAdded:(VCLocalCamera*)localCamera {
+    if (localCamera != nil && [localCamera getPosition] == VCLocalCameraPositionFront) {
+        [_connector selectLocalCamera: localCamera];
+    }
+}
+
+-(void) onLocalCameraRemoved:(VCLocalCamera*)localCamera {}
+    
+-(void) onLocalCameraSelected:(VCLocalCamera*)localCamera {
+      // If a camera is selected, then update lastSelectedCamera.
+      // localCamera will be nil only when backgrounding app while disconnected.
+      if (localCamera) {
+          lastSelectedCamera = localCamera;
+      }
+}
+
+-(void) onLocalCameraStateUpdated:(VCLocalCamera*)localCamera State:(VCDeviceState)state {}
 
 - (void)onParticipantJoined:(VCParticipant*)participant
 {
