@@ -9,9 +9,9 @@ git clone https://github.com/Vidyo/vidyoplatform-connector-react-native.git
 
 1. Download the latest Vidyo.io Android & iOS SDK packages:
 
-    > https://static.vidyo.io/22.5.0.8/package/VidyoClient-AndroidSDK.zip
+    > https://static.vidyo.io/22.4.0.6/package/VidyoClient-AndroidSDK.zip
     
-    > https://static.vidyo.io/22.5.0.8/package/VidyoClient-iOSSDK.zip
+    > https://static.vidyo.io/22.4.0.6/package/VidyoClient-iOSSDK.zip
     
 2. **Unzip VidyoClient-AndroidSDK folder and move VidyoClient.aar from `VidyoClient-AndroidSDK/lib/android` 
    to `VidyoConnector-react-native/android/app/libs/`**
