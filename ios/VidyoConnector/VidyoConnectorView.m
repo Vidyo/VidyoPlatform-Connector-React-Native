@@ -52,6 +52,8 @@
   [self selectDefaultDevices];
   [self reAssignView];
   [self showView];
+  
+  [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 - (void)removeFromSuperview {
@@ -60,7 +62,10 @@
   /* Shut down the renderer when we are moving away from view */
   [self hideView];
   [self releaseDevices];
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (void)createVidyoConnector

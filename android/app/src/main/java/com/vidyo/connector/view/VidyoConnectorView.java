@@ -1,8 +1,10 @@
 package com.vidyo.connector.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
@@ -29,11 +31,13 @@ import com.vidyo.VidyoClient.Endpoint.Participant;
 
 import java.util.ArrayList;
 
+@SuppressLint("ViewConstructor")
 public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener,
         Connector.IRegisterLocalCameraEventListener {
 
     private static final String TAG = VidyoConnectorView.class.getCanonicalName();
 
+    private ThemedReactContext themedReactContext;
     private Connector connector;
 
     private ConnectorViewStyle viewStyle = ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default;
@@ -55,6 +59,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
     public VidyoConnectorView(ThemedReactContext context) {
         super(context);
+        this.themedReactContext = context;
         Log.i(TAG, "VidyoConnectorView created.");
 
         Activity currentActivity = context.getCurrentActivity();
@@ -186,12 +191,14 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         super.onAttachedToWindow();
         selectDefaultDevices();
         refreshUi();
+        keepScreenOn(true);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         releaseDevices();
+        keepScreenOn(false);
     }
 
     private boolean isAvailable() {
@@ -227,6 +234,17 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         ReactContext reactContext = (ReactContext) getContext();
         RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
         eventEmitter.receiveEvent(getId(), event, payload);
+    }
+
+    private void keepScreenOn(boolean keep) {
+        Activity activity = themedReactContext.getCurrentActivity();
+        if (activity == null) return;
+
+        Window window = activity.getWindow();
+        if (window == null) return;
+
+        if (keep) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        else window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
