@@ -92,6 +92,9 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
                 .put("onDynamicParticipantChanged", MapBuilder.of("registrationName", "onDynamicParticipantChanged"))
                 .put("onLoudestParticipantChanged", MapBuilder.of("registrationName", "onLoudestParticipantChanged"))
 
+                .put("onAvailableResourcesChanged", MapBuilder.of("registrationName", "onAvailableResourcesChanged"))
+                .put("onMaxRemoteSourcesChanged", MapBuilder.of("registrationName", "onMaxRemoteSourcesChanged"))
+
                 .build();
     }
 

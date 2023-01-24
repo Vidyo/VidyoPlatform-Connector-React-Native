@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 @SuppressLint("ViewConstructor")
 public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener,
-        Connector.IRegisterLocalCameraEventListener {
+        Connector.IRegisterLocalCameraEventListener, Connector.IRegisterResourceManagerEventListener {
 
     private static final String TAG = VidyoConnectorView.class.getCanonicalName();
 
@@ -124,6 +124,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
         connector = new Connector(this, viewStyle, remoteParticipants, logFileFilter, logFileName, userData);
         connector.registerParticipantEventListener(this);
+        connector.registerResourceManagerEventListener(this);
     }
 
     public void dispose() {
@@ -131,6 +132,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
         if (this._initialized) {
             connector.unregisterParticipantEventListener();
+            connector.unregisterResourceManagerEventListener();
             connector.disable();
 
             ConnectorPkg.setApplicationUIContext(null);
@@ -350,6 +352,31 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     public void onLocalCameraAdded(LocalCamera localCamera) {
         if (localCamera != null && localCamera.getPosition() == LocalCamera.LocalCameraPosition.VIDYO_LOCALCAMERAPOSITION_Front)
             connector.selectLocalCamera(localCamera);
+    }
+
+    @Override
+    public void onAvailableResourcesChanged(int cpuEncode, int cpuDecode, int bandwidthSend, int bandwidthReceive) {
+        WritableMap payload = Arguments.createMap();
+        WritableMap availableResourcesMap = Arguments.createMap();
+
+        availableResourcesMap.putInt("cpuEncode", cpuEncode);
+        availableResourcesMap.putInt("cpuDecode", cpuDecode);
+        availableResourcesMap.putInt("bandwidthSend", bandwidthSend);
+        availableResourcesMap.putInt("bandwidthReceive", bandwidthReceive);
+
+        payload.putMap("resources", availableResourcesMap);
+        emit("onAvailableResourcesChanged", payload);
+    }
+
+    @Override
+    public void onMaxRemoteSourcesChanged(int maxRemoteSources) {
+        WritableMap payload = Arguments.createMap();
+        WritableMap maxRemoteSourcesMap = Arguments.createMap();
+
+        maxRemoteSourcesMap.putInt("maxRemoteSources", maxRemoteSources);
+
+        payload.putMap("resources", maxRemoteSourcesMap);
+        emit("onMaxRemoteSourcesChanged", payload);
     }
 
     @Override

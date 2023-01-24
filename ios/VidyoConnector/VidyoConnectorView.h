@@ -38,6 +38,9 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onDynamicParticipantChanged;
 @property (nonatomic, copy) RCTBubblingEventBlock onLoudestParticipantChanged;
 
+@property (nonatomic, copy) RCTBubblingEventBlock onAvailableResourcesChanged;
+@property (nonatomic, copy) RCTBubblingEventBlock onMaxRemoteSourcesChanged;
+
 - (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
 
 - (void)showView;
@@ -66,6 +69,9 @@
 - (void)onParticipantLeft:(VCParticipant*)participant;
 - (void)onDynamicParticipantChanged:(NSMutableArray*)participants;
 - (void)onLoudestParticipantChanged:(VCParticipant*)participant AudioOnly:(BOOL)audioOnly;
+
+- (void)onLoudestParticipantChanged:(unsigned int)cpuEncode CpuDecode:(unsigned int)cpuDecode BandwidthSend:(unsigned int)bandwidthSend BandwidthReceive:(unsigned int)bandwidthReceive;
+-(void) onMaxRemoteSourcesChanged:(unsigned int)maxRemoteSources;
 
 @end
 

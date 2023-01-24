@@ -49,10 +49,14 @@ RCT_CUSTOM_VIEW_PROPERTY(mode, NSString*, VidyoConnectorView) {
 RCT_EXPORT_VIEW_PROPERTY(onConnect,                   RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onFailure,                   RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDisconnect,                RCTBubblingEventBlock)
+
 RCT_EXPORT_VIEW_PROPERTY(onParticipantJoined,         RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onParticipantLeft,           RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDynamicParticipantChanged, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLoudestParticipantChanged, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onAvailableResourcesChanged, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMaxRemoteSourcesChanged,   RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(connect:(nonnull NSNumber*)reactTag
                   Portal:(NSString*)portal

@@ -80,6 +80,7 @@
   
   [_connector registerParticipantEventListener:self];
   [_connector registerLocalCameraEventListener:self];
+  [_connector registerResourceManagerEventListener: self];
 }
 
 #pragma mark - Application Lifecycle
@@ -308,6 +309,23 @@
   }
   NSDictionary *nsParticipant = @{@"id": participant.id, @"name": participant.name, @"userId": participant.userId};
   self.onLoudestParticipantChanged(@{@"participant": nsParticipant, @"audioOnly": @(audioOnly)});
+}
+
+#pragma mark - VCConnectorIRegisterResourceManagerEventListener
+-(void) onAvailableResourcesChanged:(unsigned int)cpuEncode CpuDecode:(unsigned int)cpuDecode BandwidthSend:(unsigned int)bandwidthSend BandwidthReceive:(unsigned int)bandwidthReceive
+{
+  if (!self.onAvailableResourcesChanged) { return; }
+
+  NSDictionary *nsResources = @{@"cpuEncode": [NSNumber numberWithInt: cpuEncode], @"cpuDecode": [NSNumber numberWithInt: cpuDecode], @"bandwidthSend": [NSNumber numberWithInt: bandwidthSend], @"bandwidthReceive": [NSNumber numberWithInt: bandwidthReceive]};
+  self.onAvailableResourcesChanged(@{@"resources": nsResources});
+}
+
+-(void) onMaxRemoteSourcesChanged:(unsigned int)maxRemoteSources {
+  
+  if (!self.onMaxRemoteSourcesChanged) { return; }
+  
+  NSDictionary *nsMaxRemoteSources = @{@"maxRemoteSources": [NSNumber numberWithInt: maxRemoteSources]};
+  self.onMaxRemoteSourcesChanged(@{@"resources": nsMaxRemoteSources});
 }
 
 @end

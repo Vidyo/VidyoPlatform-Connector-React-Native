@@ -106,6 +106,21 @@ export default class Conference extends Component<Props> {
         this.setState({ connectionStatus: payload.participant.name + ' left' });
     }
 
+    onAvailableResourcesChanged = (payload) => {
+        const { cpuEncode, cpuDecode, bandwidthSend, bandwidthReceive } = payload.resources;
+
+        console.log("onAvailableResourcesChanged -> cpuEncode: " + cpuEncode 
+            + " | cpuDecode: " + cpuDecode 
+            + " | bandwidthSend: " + bandwidthSend 
+            + " | bandwidthReceive: " + bandwidthReceive);
+    }
+
+    onMaxRemoteSourcesChanged = (payload) => {
+        const { maxRemoteSources } = payload.resources;
+
+        console.log("onMaxRemoteSourcesChanged -> maxRemoteSources: " + maxRemoteSources);
+    }
+
     _toggleConnect() {
         if (this.state.connected) {
             this.vidyoConnector.disconnect();
@@ -236,6 +251,9 @@ export default class Conference extends Component<Props> {
 
               onParticipantJoined         = {this.onParticipantJoined}
               onParticipantLeft           = {this.onParticipantLeft}
+
+              onAvailableResourcesChanged = {this.onAvailableResourcesChanged}
+              onMaxRemoteSourcesChanged   = {this.onMaxRemoteSourcesChanged}
 
             />
             <View style = { styles.banner }>

@@ -76,6 +76,20 @@ class VidyoConnectorView extends Component {
     }
   }
 
+  _onAvailableResourcesChanged = (event) => {
+    if (this.props.onAvailableResourcesChanged) {
+      const { ...payload } = event.nativeEvent
+      this.props.onAvailableResourcesChanged(payload);
+    }
+  }
+
+  _onMaxRemoteSourcesChanged = (event) => {
+    if (this.props.onMaxRemoteSourcesChanged) {
+      const { ...payload } = event.nativeEvent
+      this.props.onMaxRemoteSourcesChanged(payload);
+    }
+  }
+
   render() {
     return (
       <VidyoConnectorView_ ref = { _ => this.vcRef = _ } { ...this.props } 
@@ -89,6 +103,8 @@ class VidyoConnectorView extends Component {
         onDynamicParticipantChanged = {this._onDynamicParticipantChanged}
         onLoudestParticipantChanged = {this._onLoudestParticipantChanged}
 
+        onAvailableResourcesChanged = {this._onAvailableResourcesChanged}
+        onMaxRemoteSourcesChanged   = {this._onMaxRemoteSourcesChanged}
       />
     );
   }
@@ -114,6 +130,9 @@ VidyoConnectorView.propTypes = {
   onDynamicParticipantChanged:  PropTypes.func,
   onLoudestParticipantChanged:  PropTypes.func,
 
+  onAvailableResourcesChanged:  PropTypes.func,
+  onMaxRemoteSourcesChanged:    PropTypes.func,
+
   ...View.propTypes,
 };
 
@@ -127,6 +146,9 @@ var VidyoConnectorView_ = requireNativeComponent(`VidyoConnectorView`, VidyoConn
     onParticipantLeft:            true,
     onDynamicParticipantChanged:  true,
     onLoudestParticipantChanged:  true,
+
+    onAvailableResourcesChanged:  true,
+    onMaxRemoteSourcesChanged:    true,
   },
 });
 
