@@ -23,7 +23,6 @@ import com.vidyo.VidyoClient.Connector.Connector.ConnectorFailReason;
 import com.vidyo.VidyoClient.Connector.Connector.ConnectorMode;
 import com.vidyo.VidyoClient.Connector.Connector.ConnectorViewStyle;
 import com.vidyo.VidyoClient.Connector.Connector.IConnect;
-import com.vidyo.VidyoClient.Connector.Connector.IRegisterParticipantEventListener;
 import com.vidyo.VidyoClient.Connector.ConnectorPkg;
 import com.vidyo.VidyoClient.Device.Device;
 import com.vidyo.VidyoClient.Device.LocalCamera;
@@ -32,15 +31,18 @@ import com.vidyo.VidyoClient.Endpoint.Participant;
 import java.util.ArrayList;
 
 @SuppressLint("ViewConstructor")
-public class VidyoConnectorView extends FrameLayout implements IConnect, IRegisterParticipantEventListener,
-        Connector.IRegisterLocalCameraEventListener, Connector.IRegisterResourceManagerEventListener {
+public class VidyoConnectorView extends FrameLayout implements IConnect,
+        Connector.IRegisterParticipantEventListener,
+        Connector.IRegisterLocalCameraEventListener,
+        Connector.IRegisterResourceManagerEventListener {
 
     private static final String TAG = VidyoConnectorView.class.getCanonicalName();
 
-    private ThemedReactContext themedReactContext;
+    private final ThemedReactContext themedReactContext;
     private Connector connector;
 
     private ConnectorViewStyle viewStyle = ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default;
+    private Connector.ConnectorTradeOffProfile profile = Connector.ConnectorTradeOffProfile.VIDYO_CONNECTORTRADEOFFPROFILE_Medium;
 
     private int remoteParticipants = 8;
     private String logFileFilter = "debug@VidyoClient debug@VidyoConnector fatal error info";
@@ -96,9 +98,7 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     public void setViewStyle(String viewStyle) {
         ConnectorViewStyle viewStyleTiles = ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Tiles;
         ConnectorViewStyle viewStyleDefault = ConnectorViewStyle.VIDYO_CONNECTORVIEWSTYLE_Default;
-        ConnectorViewStyle connectorViewStyle = viewStyle.equals("ViewStyleTiles") ? viewStyleTiles : viewStyleDefault;
-
-        this.viewStyle = connectorViewStyle;
+        this.viewStyle = viewStyle.equals("ViewStyleTiles") ? viewStyleTiles : viewStyleDefault;
     }
 
     public void setRemoteParticipants(int remoteParticipants) {
@@ -123,8 +123,11 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         }
 
         connector = new Connector(this, viewStyle, remoteParticipants, logFileFilter, logFileName, userData);
+        Log.i(TAG, "Library version: " + connector.getVersion());
+
         connector.registerParticipantEventListener(this);
         connector.registerResourceManagerEventListener(this);
+        connector.registerLocalCameraEventListener(this);
     }
 
     public void dispose() {
@@ -188,6 +191,49 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
         connector.setMode(connectorMode);
     }
 
+    public void setProfile(String profile) {
+        switch (profile) {
+            case "high":
+                this.profile = Connector.ConnectorTradeOffProfile.VIDYO_CONNECTORTRADEOFFPROFILE_High;
+                break;
+            case "low":
+                this.profile = Connector.ConnectorTradeOffProfile.VIDYO_CONNECTORTRADEOFFPROFILE_Low;
+                break;
+            default:
+            case "medium":
+                this.profile = Connector.ConnectorTradeOffProfile.VIDYO_CONNECTORTRADEOFFPROFILE_Medium;
+                break;
+        }
+
+        connector.enableDebug(7776, "");
+        updateCameraTradeOff();
+
+//        Log.i(TAG, "TradeOff Profile selected: " + this.profile.name());
+//        connector.setCpuTradeOffProfile(Connector.ConnectorTradeOffProfile.VIDYO_CONNECTORTRADEOFFPROFILE_Medium);
+    }
+
+    private void updateCameraTradeOff() {
+        if (lastSelectedCamera == null) return;
+
+        switch (profile) {
+            case VIDYO_CONNECTORTRADEOFFPROFILE_High:
+                lastSelectedCamera.setResolutionTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_High);
+                lastSelectedCamera.setFramerateTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_High);
+                break;
+            case VIDYO_CONNECTORTRADEOFFPROFILE_Low:
+                lastSelectedCamera.setResolutionTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_Low);
+                lastSelectedCamera.setFramerateTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_Low);
+                break;
+            default:
+            case VIDYO_CONNECTORTRADEOFFPROFILE_Medium:
+                lastSelectedCamera.setResolutionTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_Medium);
+                lastSelectedCamera.setFramerateTradeOffProfile(LocalCamera.LocalCameraTradeOffProfile.VIDYO_LOCALCAMERATRADEOFFPROFILE_Medium);
+                break;
+        }
+
+        Log.i(TAG, "Local Camera TradeOff Profile set to: " + this.profile.name());
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -228,8 +274,9 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
         int width = getWidth();
         int height = getHeight();
-        connector.showViewAt(this, 0, 0, getWidth(), getHeight());
-        Log.i(VidyoConnectorView.class.getCanonicalName(), "Show view at: " + width + ":" + height);
+
+        if (width > 0 && height > 0) connector.showViewAt(this, 0, 0, width, height);
+        Log.i(VidyoConnectorView.class.getCanonicalName(), "ShowViewAt: " + width + ":" + height);
     }
 
     private void emit(String event, WritableMap payload) {
@@ -350,8 +397,17 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
 
     @Override
     public void onLocalCameraAdded(LocalCamera localCamera) {
-        if (localCamera != null && localCamera.getPosition() == LocalCamera.LocalCameraPosition.VIDYO_LOCALCAMERAPOSITION_Front)
+        if (localCamera == null) return;
+        if (localCamera.getPosition() == LocalCamera.LocalCameraPosition.VIDYO_LOCALCAMERAPOSITION_Front)
             connector.selectLocalCamera(localCamera);
+        Log.i(TAG, "OnLocalCameraAdded: " + localCamera.name);
+    }
+
+    @Override
+    public void onLocalCameraSelected(LocalCamera localCamera) {
+        if (localCamera == null) return;
+        lastSelectedCamera = localCamera;
+        Log.i(TAG, "OnLocalCameraSelected: " + localCamera.name);
     }
 
     @Override
@@ -380,17 +436,8 @@ public class VidyoConnectorView extends FrameLayout implements IConnect, IRegist
     }
 
     @Override
-    public void onLocalCameraSelected(LocalCamera localCamera) {
-        lastSelectedCamera = localCamera;
-    }
+    public void onLocalCameraRemoved(LocalCamera localCamera) { /* */ }
 
     @Override
-    public void onLocalCameraRemoved(LocalCamera localCamera) {
-
-    }
-
-    @Override
-    public void onLocalCameraStateUpdated(LocalCamera localCamera, Device.DeviceState deviceState) {
-
-    }
+    public void onLocalCameraStateUpdated(LocalCamera localCamera, Device.DeviceState deviceState) { /* */ }
 }

@@ -19,11 +19,13 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
     private VidyoConnectorView vidyoConnectorView;
     private ThemedReactContext context;
 
+    @NonNull
     @Override
     public String getName() {
         return REACT_CLASS;
     }
 
+    @NonNull
     @Override
     public VidyoConnectorView createViewInstance(@NonNull ThemedReactContext context) {
         /* Refresh */
@@ -75,6 +77,11 @@ public class VidyoConnectorViewManager extends SimpleViewManager<VidyoConnectorV
     @ReactProp(name = "mode")
     public void setMode(VidyoConnectorView vc, String mode) {
         vc.setMode(mode);
+    }
+
+    @ReactProp(name = "tradeOffProfile")
+    public void setTradeOffProfile(VidyoConnectorView vc, String profile) {
+        vc.setProfile(profile);
     }
 
     @Nullable

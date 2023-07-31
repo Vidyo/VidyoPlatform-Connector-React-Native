@@ -121,6 +121,8 @@ VidyoConnectorView.propTypes = {
   cameraPrivacy:                PropTypes.bool,
   microphonePrivacy:            PropTypes.bool,
 
+  tradeOffProfile:              PropTypes.string,
+
   onConnect:                    PropTypes.func,
   onFailure:                    PropTypes.func,
   onDisconnect:                 PropTypes.func,

@@ -244,6 +244,7 @@ export default class Conference extends Component<Props> {
               microphonePrivacy           = {this.state.microphoneButtonState}
 
               mode                        = {this.state.connectorMode}
+              tradeOffProfile             = "low"
 
               onConnect                   = {this.onConnect}
               onFailure                   = {this.onFailure}
