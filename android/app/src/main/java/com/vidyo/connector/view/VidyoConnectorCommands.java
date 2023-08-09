@@ -7,7 +7,7 @@ public enum VidyoConnectorCommands {
     DISCONNECT(1),
     CYCLE_CAMERA(2);
 
-    int code;
+    final int code;
 
     VidyoConnectorCommands(int code) {
         this.code = code;
