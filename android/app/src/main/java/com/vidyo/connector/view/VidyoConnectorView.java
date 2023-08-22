@@ -1,5 +1,7 @@
 package com.vidyo.connector.view;
 
+import static com.vidyo.VidyoClient.Connector.Connector.ConnectorLoggerType.VIDYO_CONNECTORLOGGERTYPE_FILE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -128,6 +130,9 @@ public class VidyoConnectorView extends FrameLayout implements IConnect,
         connector.registerParticipantEventListener(this);
         connector.registerResourceManagerEventListener(this);
         connector.registerLocalCameraEventListener(this);
+
+        connector.setLogLevel(VIDYO_CONNECTORLOGGERTYPE_FILE,
+                Connector.ConnectorLogLevel.VIDYO_CONNECTORLOGLEVEL_DEBUG);
     }
 
     public void dispose() {

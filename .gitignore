@@ -14,7 +14,7 @@ web-build/
 # macOS
 .DS_Store
 
-/android/app/libs/
+# /android/app/libs/
 /ios/lib/
 
 ## User settings
